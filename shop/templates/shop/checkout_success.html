@@ -1,0 +1,14 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}Order Successful{% endblock title %}
+
+{% block content %}
+<div class="container my-5 text-center " style="min-height: 500px;">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-success">✅ Order Placed Successfully!</h2>
+            <a href="{% url 'collections' %}" class="btn btn-primary mt-3">Continue Shopping</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

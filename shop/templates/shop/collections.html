@@ -1,0 +1,28 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+shopkart | Collectionspage
+{% endblock title %}
+
+{% block content %}
+<div class="container my-5" style="min-height: 600px;">
+    <div class="row">
+        <h1 class="mb-4">CATEGORIES</h1>
+        <hr>
+        {% for i in categories_collections %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 text-center" style="width: 18rem;">
+                <a href="{% url 'category_products' i.id %}">
+                    <img class="p-3" src="{{ i.image.url }}" style="height: 250px; width: 270px; object-fit:cover;"
+                        class="card-img-top" alt="{{ i.name }}">
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name | upper}}</h5>
+                    <p class="card-text">{{ i.description|truncatechars:100 }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

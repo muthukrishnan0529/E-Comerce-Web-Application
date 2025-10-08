@@ -1,0 +1,79 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+shopkart | product_viewpage
+{% endblock title %}
+
+{% block content %}
+
+<div class="container my-5" style="min-height: 600px;">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{% url 'collections' %}">Categories</a></li>
+            <li class="breadcrumb-item"><a
+                    href="{% url 'category_products' one_product.category.id %}">{{one_product.category}}</a></li>
+        </ol>
+    </nav>
+    <div class="row">
+        <br>
+        <h1>MORE ABOUT {{ one_product.name | upper}}</h1>
+        <hr>
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 text-center" style="width: 18rem;">
+                <a href="#">
+                    <img class="p-4 mt-4" src="{{ one_product.product_image.url }}"
+                        style="height: 250px; width: 270px; object-fit:cover;" class="card-img-top" alt="{{ i.name }}">
+                    {% if one_product.trending %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2"> Best seller</span>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+        <div class="col-md-3 mb-4">
+            <div class="card-body">
+                <h5 class="card-title">{{ one_product.name | upper}}</h5>
+                <p class="card-text">{{ one_product.description}}</p>
+                <s class="text-danger">
+                    <p class="card-text ">Price :{{ one_product.original_price | stringformat:'d' }}</p>
+                </s>
+                <p class="card-text text-success">Discount Price :{{ one_product.selling_price | stringformat:'d' }}
+                </p>
+                <span>
+                    {% if one_product.quantity > 0 %}
+                    <a href="{% url 'add_to_cart' one_product.id %}" class="btn btn-primary"><i class="fa fa-shopping-cart"></i> Add cart</a>
+                    {% else %}
+                    <a href="#" class="btn btn-secondary">Out of stock</a>
+                    {% endif %}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container my-5">
+    <h1>SIMILAR PRODUCTS</h1>
+    <hr>
+    <div class="row">
+        {% for i in similar_product %}
+        <div class="col-md-3 mb-4">
+            <div class="card h-100 text-center" style="width: 18rem;">
+                <a href="{% url 'product_view' i.id %}">
+                    <img class="p-3 mt-4 pt-4" src="{{ i.product_image.url }}"
+                        style="height: 250px; width: 270px; object-fit:cover;" class="card-img-top" alt="{{ i.name }}">
+                    {% if i.trending %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2"> Best seller</span>
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name | upper}}</h5>
+                    <s class="text-danger">
+                        <p class="card-text ">Price :{{ i.original_price | stringformat:'d' }}</p>
+                    </s>
+                    <p class="card-text text-success">Discount Price :{{ i.selling_price | stringformat:'d' }}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+shopkart | homepage
+{% endblock title %}
+
+
+
+{% block content %}
+{% include 'shop/inc/slider.html' %}
+
+<div class="container">
+    <div class="row my-5">
+        <br>
+        <h1>TRENDING PRODUCTS</h1>
+        <hr>
+
+        {% for i in trending_products %}
+        <div class="col-md-3 mb-4 ">
+            <div class="card h-100 text-center" style="width: 18rem;">
+                <a href="{% url 'product_view' i.id %}">
+                    <img class="p-4 mt-4" src="{{ i.product_image.url }}"
+                        style="height: 250px; width: 270px; object-fit:cover;" class="card-img-top" alt="{{ i.name }}">
+                    {% if i.trending %}
+                    <span class="badge bg-danger position-absolute top-0 end-0 m-2"> Best seller</span>
+                    {% endif %}
+                </a>
+                <div class="card-body">
+                    <h5 class="card-title">{{ i.name | upper }}</h5>
+                    <s class="text-danger">
+                        <p class="card-text ">Price :{{ i.original_price | stringformat:'d' }}</p>
+                    </s>
+                    <p class="card-text text-success">Discount Price :{{ i.selling_price | stringformat:'d'}}</p>
+
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+
+    </div>
+</div>
+{% endblock content %}

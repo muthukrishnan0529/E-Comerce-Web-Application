@@ -1,0 +1,71 @@
+{% extends 'shop/layouts/main.html' %}
+
+{% block title %}
+shopkart | registerpage
+{% endblock title %}
+
+
+{% block content %}
+
+<div class="container" style="min-height: 600px;">
+    <div class="row ">
+        <div class="col-12 mt-4">
+            <h1>REGISTER</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <form action="" method="post">
+                {% csrf_token %}
+                <div class="mt-4 ">
+                    <label for="" class="form-label">Username</label>
+                    {{forms.username}}
+                </div>
+                <div class="mt-4">
+                    <label for="" class="form-label">Email</label>
+                    {{forms.email}}
+                </div>
+                <div class="mt-4">
+                    <label for="" class="form-label">Password</label>
+                    {{forms.password1}}
+                </div>
+                <div class="mt-4">
+                    <label for="" class="form-label">Confirm Password</label>
+                    {{forms.password2}}
+                </div>
+                <div class="mt-4">
+                    <button class="btn btn-primary" type="submit">Register</button>
+                </div>
+            </form>
+            <div class="my-2">
+                <p>Already a user?<a class="text-decoration-none" href="{% url 'login' %}"> Login</a></p>
+            </div>
+            {% include 'shop/inc/message.html' %}
+        </div>
+        <div class="col-6">
+            <div class="div">
+                {% if forms.errors.username %}
+                <label class="text-danger">{{forms.errors.username}}</label>
+                {% endif %}
+            </div>
+            <div class="div">
+                {% if forms.errors.email %}
+                <label class="text-danger">{{forms.errors.email}}</label>
+                {% endif %}
+            </div>
+            <div class="div">
+                {% if forms.errors.password1 %}
+                <label class="text-danger">{{forms.errors.password1}}</label>
+                {% endif %}
+            </div>
+            <div class="div">
+                {% if forms.errors.password2 %}
+                <label class="text-danger">{{forms.errors.password2}}</label>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock content %}
